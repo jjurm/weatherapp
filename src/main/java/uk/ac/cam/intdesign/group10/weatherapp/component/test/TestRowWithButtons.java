@@ -1,4 +1,4 @@
-package uk.ac.cam.intdesign.group10.weatherapp.component;
+package uk.ac.cam.intdesign.group10.weatherapp.component.test;
 
 import java.awt.Button;
 import java.awt.Color;
@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
+import uk.ac.cam.intdesign.group10.weatherapp.component.AppComponent;
 import uk.ac.cam.intdesign.group10.weatherapp.content.DayContentPanel;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.WelcomeScreen;

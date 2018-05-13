@@ -1,4 +1,4 @@
-package uk.ac.cam.intdesign.group10.weatherapp.component;
+package uk.ac.cam.intdesign.group10.weatherapp.component.test;
 
 import java.awt.Color;
 

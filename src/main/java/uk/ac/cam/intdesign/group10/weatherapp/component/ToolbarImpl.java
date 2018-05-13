@@ -6,6 +6,7 @@ import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestComponent;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 
 public class ToolbarImpl extends JPanel implements Toolbar {

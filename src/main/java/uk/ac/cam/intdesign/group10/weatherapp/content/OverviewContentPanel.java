@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
 import uk.ac.cam.intdesign.group10.weatherapp.component.TemperatureOverviewImpl;
-import uk.ac.cam.intdesign.group10.weatherapp.component.TestRowWithButtons;
+import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestRowWithButtons;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
