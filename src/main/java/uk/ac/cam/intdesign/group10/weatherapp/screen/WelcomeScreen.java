@@ -7,6 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestComponent;
+import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
 public class WelcomeScreen extends JPanel implements Screen {
@@ -25,5 +26,10 @@ public class WelcomeScreen extends JPanel implements Screen {
     @Override
     public void acceptWeatherData(WeatherData data) {
         // welcome screen doesn't display weather data, so do nothing if data come
+    }
+
+    @Override
+    public void acceptLocation(Location location) {
+        // the screen should change to HomeScreen as soon as location is chosen, so we don't care
     }
 }

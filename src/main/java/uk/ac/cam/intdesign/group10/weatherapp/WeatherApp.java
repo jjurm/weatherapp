@@ -4,18 +4,30 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
+import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.Screen;
+import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
+import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloader;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
-public class WeatherApp extends JFrame {
+public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataDownloader.Observer {
+
+    private WeatherDataDownloader weatherDataDownloader = null;
+
+    // we store the most recent WeatherData and Location,
+    // so that it can be used instantly when we switch Screen
+    private WeatherData lastWeatherData = null;
+    private Location lastLocation = null;
 
     private Screen currentScreen;
     private JPanel screenHolder;
@@ -24,6 +36,13 @@ public class WeatherApp extends JFrame {
         screenHolder.removeAll();
         currentScreen = screen;
         screenHolder.add(screen.getRootComponent());
+
+        if (lastWeatherData != null) {
+            currentScreen.acceptWeatherData(lastWeatherData);
+        }
+        if (lastLocation != null) {
+            currentScreen.acceptLocation(lastLocation);
+        }
 
         // repaint panel and recalculate layout of components
         screenHolder.repaint();
@@ -35,6 +54,10 @@ public class WeatherApp extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(600, 240);
         setSize(300, 400);
+
+        // TODO
+        //weatherDataDownloader = ...
+        //weatherDataDownloader.subscribe(this);
 
         createComponents();
         changeScreen(new HomeScreen(this));
@@ -60,6 +83,35 @@ public class WeatherApp extends JFrame {
 
     }
 
+    @Override
+    public void acceptLocation(Location location) {
+        lastLocation = location;
+
+        // notify the screen
+        currentScreen.acceptLocation(location);
+
+        // and asynchronously query weather update
+        if (weatherDataDownloader != null) {
+            weatherDataDownloader.fetchData();
+        } else {
+            System.out.println("Downloading weather data not implemented yet");
+        }
+    }
+
+    @Override
+    public void acceptWeatherData(WeatherData data) {
+        // means we've got fresh weather data from the provider
+        lastWeatherData = data;
+
+        // notify the screen
+        currentScreen.acceptWeatherData(data);
+    }
+
+    @Override
+    public void handleError(IOException exception) {
+        System.out.println("Error while downloading weather data:");
+        exception.printStackTrace();
+    }
 
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:

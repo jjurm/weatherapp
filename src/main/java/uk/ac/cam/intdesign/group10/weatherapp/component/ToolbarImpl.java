@@ -22,7 +22,7 @@ public class ToolbarImpl extends JPanel implements Toolbar {
     }
 
     @Override
-    public void displayLocation(Location location) {
+    public void acceptLocation(Location location) {
         // TODO
     }
 }

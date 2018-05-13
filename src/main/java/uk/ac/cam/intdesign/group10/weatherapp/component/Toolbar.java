@@ -1,9 +1,7 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
-import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
+import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 
-public interface Toolbar extends AppComponent {
-
-    public abstract void displayLocation(Location location);
+public interface Toolbar extends AppComponent, LocationConsumer {
 
 }

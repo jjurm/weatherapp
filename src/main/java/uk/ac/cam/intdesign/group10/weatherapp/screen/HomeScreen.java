@@ -9,13 +9,16 @@ import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
 import uk.ac.cam.intdesign.group10.weatherapp.component.Header;
 import uk.ac.cam.intdesign.group10.weatherapp.content.ContentPanel;
 import uk.ac.cam.intdesign.group10.weatherapp.content.OverviewContentPanel;
+import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
 public class HomeScreen extends JPanel implements Screen {
 
     private WeatherApp app;
+    // we store the most recent WeatherData, so that it can be used instantly when we switch ContentPanel
     private WeatherData lastWeatherData = null;
 
+    private final Header header;
     private final JPanel contentPanelHolder;
     private ContentPanel currentContentPanel;
 
@@ -41,7 +44,8 @@ public class HomeScreen extends JPanel implements Screen {
         this.app = app;
 
         setLayout(new BorderLayout());
-        add(new Header(), BorderLayout.NORTH);
+        header = new Header(app, this);
+        add(header, BorderLayout.NORTH);
 
         contentPanelHolder = new JPanel();
         contentPanelHolder.setLayout(new BorderLayout());
@@ -58,8 +62,15 @@ public class HomeScreen extends JPanel implements Screen {
     @Override
     public void acceptWeatherData(WeatherData data) {
         lastWeatherData = data;
-        if (lastWeatherData != null) {
-            currentContentPanel.acceptWeatherData(lastWeatherData);
-        }
+
+        // must notify both the header and the current ContentPanel
+        header.acceptWeatherData(data);
+        currentContentPanel.acceptWeatherData(lastWeatherData);
+    }
+
+    @Override
+    public void acceptLocation(Location location) {
+        // notify the Header
+        header.acceptLocation(location);
     }
 }
