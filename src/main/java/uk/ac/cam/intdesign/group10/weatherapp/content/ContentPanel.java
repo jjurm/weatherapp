@@ -1,6 +1,11 @@
 package uk.ac.cam.intdesign.group10.weatherapp.content;
 
-import javax.swing.JComponent;
+import uk.ac.cam.intdesign.group10.weatherapp.component.AppComponent;
+import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataConsumer;
 
-public class ContentPanel extends JComponent {
+/**
+ * ContentPanel is abstraction of different contents that can be put into HomeScreen.
+ * Implementations are OverviewContentPanel and DayContentPanel
+ */
+public interface ContentPanel extends AppComponent, WeatherDataConsumer {
 }

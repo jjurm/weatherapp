@@ -1,6 +1,10 @@
 package uk.ac.cam.intdesign.group10.weatherapp.screen;
 
-import javax.swing.JPanel;
+import uk.ac.cam.intdesign.group10.weatherapp.component.AppComponent;
+import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataConsumer;
 
-public abstract class Screen extends JPanel {
+/**
+ * Screens are: WelcomeScreen, HomeScreen.
+ */
+public interface Screen extends AppComponent, WeatherDataConsumer {
 }

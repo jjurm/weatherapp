@@ -5,29 +5,29 @@ import java.util.List;
 
 public class WeatherData {
 
-    double actualTemperature;
-    double minTemperature;
-    double maxTemperature;
-    double feelsLikeTemperature;
-    double windSpeed;
-    double humidity;
-    double precipitation;
-    Date sunrise;
-    Date sunset;
+    public double actualTemperature;
+    public double minTemperature;
+    public double maxTemperature;
+    public double feelsLikeTemperature;
+    public double windSpeed;
+    public double humidity;
+    public double precipitation;
+    public Date sunrise;
+    public Date sunset;
 
-    List<DayInfo> days;
+    public List<DayInfo> days;
 
 
     public static class DayInfo {
-        Date day;
-        String decription;
-        double temperature;
+        public Date day;
+        public String decription;
+        public double temperature;
     }
 
     public static class HourInfo {
-        Date date;
-        double temperature;
-        WeatherType type;
+        public Date date;
+        public double temperature;
+        public WeatherType type;
     }
 
     public static enum WeatherType {
