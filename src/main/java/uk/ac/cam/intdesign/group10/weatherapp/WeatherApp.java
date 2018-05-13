@@ -49,6 +49,10 @@ public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataD
         screenHolder.revalidate();
     }
 
+    public void openLocationPickingDialog() {
+        // TODO
+    }
+
     private WeatherApp() {
         super("Weather app");
         setDefaultCloseOperation(EXIT_ON_CLOSE);

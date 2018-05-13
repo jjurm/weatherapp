@@ -18,7 +18,6 @@ public class OverviewContentPanel extends JPanel implements ContentPanel {
     private HomeScreen homeScreen;
 
     private final TemperatureOverviewImpl temperatureOverview;
-    private final TestRowWithButtons testRow;
 
     public OverviewContentPanel(WeatherApp app, HomeScreen homeScreen) {
         this.app = app;
@@ -30,8 +29,7 @@ public class OverviewContentPanel extends JPanel implements ContentPanel {
         temperatureOverview = new TemperatureOverviewImpl();
         add(temperatureOverview);
 
-        testRow = new TestRowWithButtons(app, homeScreen);
-        add(testRow);
+        add(new TestRowWithButtons(app, homeScreen));
     }
 
     @Override
