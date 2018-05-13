@@ -1,9 +1,15 @@
 package uk.ac.cam.intdesign.group10.weatherapp.screen;
 
-import javax.swing.JComponent;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
-public class HomeScreen extends JComponent {
+import uk.ac.cam.intdesign.group10.weatherapp.component.TestComponent;
 
+public class HomeScreen extends Screen {
 
-
+    public HomeScreen() {
+        setLayout(new BorderLayout());
+        add(new TestComponent("Home screen", Color.green));
+        setBackground(Color.black);
+    }
 }
