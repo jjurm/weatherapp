@@ -16,6 +16,7 @@ import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.Screen;
+import uk.ac.cam.intdesign.group10.weatherapp.weather.MockWeatherDataProvider;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloader;
 
@@ -63,8 +64,8 @@ public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataD
         //setSize(300, 400);
 
         // TODO
-        //weatherDataDownloader = ...
-        //weatherDataDownloader.subscribe(this);
+        weatherDataDownloader = new MockWeatherDataProvider();
+        weatherDataDownloader.subscribe(this);
 
         createComponents();
         changeScreen(new HomeScreen(this));
@@ -80,6 +81,8 @@ public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataD
 
         pack();
         setVisible(true);
+
+        weatherDataDownloader.fetchData();
     }
 
     private void createComponents() {
