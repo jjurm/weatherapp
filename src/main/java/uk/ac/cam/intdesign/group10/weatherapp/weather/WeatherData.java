@@ -1,8 +1,13 @@
 package uk.ac.cam.intdesign.group10.weatherapp.weather;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class WeatherData {
 
@@ -34,7 +39,28 @@ public class WeatherData {
     }
 
     public static enum WeatherType {
-        SUNNY, RAINY, PARTLY_CLOUDY, CLOUDY, SNOWY, LIGHTNING;
+        SUNNY("Sunny", ""),
+        RAINY("Rainy", ""),
+        PARTLY_CLOUDY("Partly cloudy", ""),
+        CLOUDY("Cloudy", ""),
+        SNOWY("Snowy", ""),
+        LIGHTNING("Lightning", "");
+
+        private String description;
+        private String filename;
+
+        private BufferedImage image;
+
+        WeatherType(String description, String filename) {
+            this.description = description;
+            this.filename = filename;
+
+            try {
+                image = ImageIO.read(new File(filename));
+            } catch (IOException e) {
+                image = new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB);
+            }
+        }
     }
 
 }
