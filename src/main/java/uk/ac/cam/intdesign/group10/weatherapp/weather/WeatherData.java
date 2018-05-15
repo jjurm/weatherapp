@@ -39,27 +39,35 @@ public class WeatherData {
     }
 
     public static enum WeatherType {
-        SUNNY("Sunny", ""),
-        RAINY("Rainy", ""),
-        PARTLY_CLOUDY("Partly cloudy", ""),
-        CLOUDY("Cloudy", ""),
-        SNOWY("Snowy", ""),
-        LIGHTNING("Lightning", "");
+        SUNNY("Sunny", "016-sun.png"),
+        RAINY("Rainy", "011-raining.png"),
+        PARTLY_CLOUDY("Partly cloudy", "014-cloudy.png"),
+        CLOUDY("Cloudy", "013-cloud.png"),
+        SNOWY("Snowy", "011-raining.png"),
+        LIGHTNING("Lightning", "010-storm.png");
 
         private String description;
-        private String filename;
 
         private BufferedImage image;
 
         WeatherType(String description, String filename) {
             this.description = description;
-            this.filename = filename;
 
+            File file = new File("assets/icons/" + filename);
             try {
-                image = ImageIO.read(new File(filename));
+                image = ImageIO.read(file);
             } catch (IOException e) {
+                System.out.println("Can't load " + file.toString());
                 image = new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB);
             }
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public BufferedImage getImage() {
+            return image;
         }
     }
 

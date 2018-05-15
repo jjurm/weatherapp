@@ -39,7 +39,7 @@ public class TestRowWithButtons extends JPanel implements AppComponent, WeatherD
 
         JButton btn1 = new JButton("Go to welcome screen");
         btn1.addActionListener(e -> {
-            app.changeScreen(new WelcomeScreen());
+            app.changeScreen(new WelcomeScreen(app));
         });
         add(btn1);
 
