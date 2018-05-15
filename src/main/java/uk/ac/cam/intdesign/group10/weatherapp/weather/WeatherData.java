@@ -22,6 +22,7 @@ public class WeatherData {
         public Date day;
         public String decription;
         public double temperature;
+        public List<HourInfo> hours;
     }
 
     public static class HourInfo {

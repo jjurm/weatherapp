@@ -2,6 +2,7 @@ package uk.ac.cam.intdesign.group10.weatherapp;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -21,6 +22,8 @@ import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloader;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
 public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataDownloader.Observer {
+
+    public static final Dimension screenDimension = new Dimension(360, 600);
 
     private WeatherDataDownloader weatherDataDownloader = null;
 
@@ -57,7 +60,7 @@ public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataD
         super("Weather app");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(600, 240);
-        setSize(300, 400);
+        //setSize(300, 400);
 
         // TODO
         //weatherDataDownloader = ...
@@ -75,6 +78,7 @@ public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataD
             }
         });
 
+        pack();
         setVisible(true);
     }
 
@@ -83,6 +87,7 @@ public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataD
 
         screenHolder = new JPanel();
         screenHolder.setLayout(new BorderLayout(0, 0));
+        screenHolder.setPreferredSize(screenDimension);
         pane.add(screenHolder, BorderLayout.CENTER);
 
     }

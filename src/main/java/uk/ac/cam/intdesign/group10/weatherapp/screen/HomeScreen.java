@@ -1,9 +1,11 @@
 package uk.ac.cam.intdesign.group10.weatherapp.screen;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
 import uk.ac.cam.intdesign.group10.weatherapp.component.Header;
@@ -49,7 +51,15 @@ public class HomeScreen extends JPanel implements Screen {
 
         contentPanelHolder = new JPanel();
         contentPanelHolder.setLayout(new BorderLayout());
-        add(contentPanelHolder, BorderLayout.CENTER);
+
+        // set preferred size to minimum so that it's not wider than the screen
+        // it will be resized by the scrollPane to fill the screen size
+        contentPanelHolder.setPreferredSize(new Dimension(0, 0));
+
+        JScrollPane scrollPane = new JScrollPane(contentPanelHolder,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setViewportView(contentPanelHolder);
 
         changeContentPanel(new OverviewContentPanel(app, this));
     }

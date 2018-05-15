@@ -1,9 +1,9 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component.test;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,13 +37,13 @@ public class TestRowWithButtons extends JPanel implements AppComponent, WeatherD
         lblTemperature = new JLabel("Temperature: ??");
         add(lblTemperature);
 
-        Button btn1 = new Button("Go to welcome screen");
+        JButton btn1 = new JButton("Go to welcome screen");
         btn1.addActionListener(e -> {
             app.changeScreen(new WelcomeScreen());
         });
         add(btn1);
 
-        Button btn2 = new Button("Switch to DayContent");
+        JButton btn2 = new JButton("Switch to DayContent");
         btn2.addActionListener(e -> {
             homeScreen.changeContentPanel(new DayContentPanel());
         });
