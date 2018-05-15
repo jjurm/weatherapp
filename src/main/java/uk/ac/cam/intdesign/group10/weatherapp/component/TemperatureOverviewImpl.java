@@ -7,6 +7,8 @@ import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
 public class TemperatureOverviewImpl extends JPanel implements TemperatureOverview {
 
+    public TemperatureOverviewImpl(){
+    }
     @Override
     public JComponent getRootComponent() {
         return this;
