@@ -5,6 +5,6 @@ public interface SuitabilityEstimator {
     /**
      * Returns double in the range 0-1.
      */
-    public double estimate(WeatherData.HourInfo hourInfo);
+    public double estimate(WeatherData.HourInfo hourInfo, double minTemperature, double maxTemperature);
 
 }

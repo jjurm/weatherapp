@@ -18,65 +18,41 @@ public class HourRowImpl extends JPanel implements HourRow, WeatherDataConsumer{
 	public WeatherData weatherData;
 	public int fromHour;
 	public int toHour;
-	public double hourTemperature;
 	public int day = Calendar.DAY_OF_MONTH;
-	
+	public HourInfo hour;
 	
 	public HourRowImpl(int startHourOfROw, int endHourOfRow) {
 		fromHour = startHourOfROw;
 		toHour = endHourOfRow;
-		hourTemperature = getHourTemperature();
-		
-	}
-	
-	public double getHourTemperature() {
-		
-		double temp = 0.0;
-		List<DayInfo> days = weatherData.days;
-		for(DayInfo d : days) {
-			if(d.day.getDayOfMonth() == day){
-				
-				List<HourInfo> hours = d.hours;
-				for(HourInfo h : hours) {
-					if(fromHour == h.time.getHour()) {
-						
-						temp = h.temperature;
-						
-					}
-				}
-			}
-			
-			break;
-		}
-		return temp;
-		
 		
 		
 	}
+
 	
 	public JLabel hoursLabel() {
-		JLabel jFromHour = new JLabel();
+		JLabel jHour = new JLabel();
 		if(fromHour < 10) {
 			if(toHour < 10) {
-			jFromHour.setText("0" + String.valueOf(fromHour) + " - " + "0"+ String.valueOf(toHour));
+			jHour.setText("0" + String.valueOf(fromHour) + " - " + "0"+ String.valueOf(toHour));
 			} else {
 				
-				jFromHour.setText("0" + String.valueOf(fromHour) + " - " + String.valueOf(toHour));
+				jHour.setText("0" + String.valueOf(fromHour) + " - " + String.valueOf(toHour));
 				
 			}
 		} else {
-			jFromHour.setText(String.valueOf(fromHour) + " - " + String.valueOf(toHour));
+			jHour.setText(String.valueOf(fromHour) + " - " + String.valueOf(toHour));
 		}
-		return jFromHour;
+		return jHour;
 		
 	}
 	
 
 	public JLabel temperatureLabel() {
 		JLabel jTemperature = new JLabel();
-		jTemperature.setText(String.valueOf(hourTemperature) + " \u00b0" + "C");
+		
 		return jTemperature;
 	}
+	
 	
 	
 	@Override
