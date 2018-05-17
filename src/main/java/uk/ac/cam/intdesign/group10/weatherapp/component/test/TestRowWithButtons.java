@@ -45,7 +45,7 @@ public class TestRowWithButtons extends JPanel implements AppComponent, WeatherD
 
         JButton btn2 = new JButton("Switch to DayContent");
         btn2.addActionListener(e -> {
-            homeScreen.changeContentPanel(new DayContentPanel());
+            homeScreen.changeContentPanel(new DayContentPanel(0));
         });
         add(btn2);
     }
