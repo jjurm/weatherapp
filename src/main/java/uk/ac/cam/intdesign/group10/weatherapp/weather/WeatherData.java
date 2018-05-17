@@ -11,14 +11,14 @@ import javax.imageio.ImageIO;
 
 public class WeatherData {
 
-    public double actualTemperature;
+    public Double actualTemperature;
     public WeatherType type;
-    public double minTemperature;
-    public double maxTemperature;
-    public double feelsLikeTemperature;
-    public double windSpeed;
-    public double humidity;
-    public double precipitation;
+    public Double minTemperature;
+    public Double maxTemperature;
+    public Double feelsLikeTemperature;
+    public Double windSpeed;
+    public Double humidity; //In percentage
+    public Double precipitation;
     public LocalTime sunrise;
     public LocalTime sunset;
 
@@ -28,13 +28,13 @@ public class WeatherData {
     public static class DayInfo {
         public LocalDate day;
         public WeatherType type;
-        public double temperature;
+        public Double temperature; //Max temperature for that day
         public List<HourInfo> hours;
     }
 
     public static class HourInfo {
         public LocalTime time;
-        public double temperature;
+        public Double temperature;
         public WeatherType type;
     }
 

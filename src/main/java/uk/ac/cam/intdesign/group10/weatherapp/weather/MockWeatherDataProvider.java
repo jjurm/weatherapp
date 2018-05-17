@@ -9,6 +9,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+
+import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 
 public class MockWeatherDataProvider implements WeatherDataDownloader {
 
@@ -17,18 +21,18 @@ public class MockWeatherDataProvider implements WeatherDataDownloader {
     private List<Observer> observers = new LinkedList<>();
 
     @Override
-    public void fetchData() {
+    public void fetchData(Location loc) {
         executor.submit(this::mockWeather);
     }
 
     private void mockWeather() {
         WeatherData data = new WeatherData();
-        data.actualTemperature = 27;
+        data.actualTemperature = 27.0;
         data.type = WeatherData.WeatherType.SUNNY;
-        data.minTemperature = 21;
-        data.maxTemperature = 28;
-        data.feelsLikeTemperature = 29;
-        data.windSpeed = 10;
+        data.minTemperature = 21.0;
+        data.maxTemperature = 28.0;
+        data.feelsLikeTemperature = 29.0;
+        data.windSpeed = 10.0;
         data.humidity = 0.75;
         data.precipitation = 0.12;
         data.sunrise = LocalTime.of(7, 12);
