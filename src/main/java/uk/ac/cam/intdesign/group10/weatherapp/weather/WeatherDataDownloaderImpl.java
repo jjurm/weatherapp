@@ -140,11 +140,14 @@ public class WeatherDataDownloaderImpl implements WeatherDataDownloader
     	JsonArray weatherList;
     	int curDay, firstHour = -1;
     	Integer yr, mth, dy, hr, mn;
+    	String locationCode;
+    	
+    	locationCode = "zmw:" + cityLocation.getLocation();
     	
 		try
 		{
 			//Conditions for the current day
-			root = readJsonFromURL(signedKeyUrl + "conditions/q/" + cityLocation.getLocation() + ".json").getAsJsonObject();
+			root = readJsonFromURL(signedKeyUrl + "conditions/q/" + locationCode + ".json").getAsJsonObject();
 			currentInfo = root.get("current_observation").getAsJsonObject();
 			
 			data.actualTemperature = stringToDouble( currentInfo.get("temp_c").getAsString() );
@@ -154,7 +157,7 @@ public class WeatherDataDownloaderImpl implements WeatherDataDownloader
 			data.precipitation = stringToDouble( currentInfo.get("precip_today_metric").getAsString() );
 			
 			//Sunrise + sunset
-			root = readJsonFromURL(signedKeyUrl + "astronomy/q/" + cityLocation.getLocation() + ".json").getAsJsonObject();
+			root = readJsonFromURL(signedKeyUrl + "astronomy/q/" + locationCode + ".json").getAsJsonObject();
 			
 			currentInfo = root.get("sun_phase").getAsJsonObject().get("sunrise").getAsJsonObject();
 			hr = stringToInt( currentInfo.get("hour").getAsString() );
@@ -173,7 +176,7 @@ public class WeatherDataDownloaderImpl implements WeatherDataDownloader
 				data.sunset = LocalTime.of(hr, mn);
 			
 			//Next days forecast
-			root = readJsonFromURL(signedKeyUrl + "forecast/q/" + cityLocation.getLocation() + ".json").getAsJsonObject();
+			root = readJsonFromURL(signedKeyUrl + "forecast/q/" + locationCode + ".json").getAsJsonObject();
 			weatherList = root.get("forecast").getAsJsonObject().get("simpleforecast").getAsJsonObject().get("forecastday").getAsJsonArray();
 			
 			data.minTemperature = stringToDouble( weatherList.get(0).getAsJsonObject().get("low").getAsJsonObject().get("celsius").getAsString() );
@@ -199,7 +202,7 @@ public class WeatherDataDownloaderImpl implements WeatherDataDownloader
 			}
 			
 			//Hourly weather
-			root = readJsonFromURL(signedKeyUrl + "hourly10day/q/" + cityLocation.getLocation() + ".json").getAsJsonObject();
+			root = readJsonFromURL(signedKeyUrl + "hourly10day/q/" + locationCode + ".json").getAsJsonObject();
 			weatherList = root.get("hourly_forecast").getAsJsonArray();
 			
 			curDay = 0;
