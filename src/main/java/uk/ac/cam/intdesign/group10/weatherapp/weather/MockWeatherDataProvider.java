@@ -43,12 +43,12 @@ public class MockWeatherDataProvider implements WeatherDataDownloader {
             WeatherData.DayInfo day = new WeatherData.DayInfo();
             day.day = LocalDate.now().plusDays(i);
             day.type = WeatherData.WeatherType.CLOUDY;
-            day.temperature = 28 + 2.5 * i;
+            day.temperature = 15 + 2.5 * i;
             day.hours = IntStream.range(0, 24)
                     .mapToObj(h -> {
                         WeatherData.HourInfo hour = new WeatherData.HourInfo();
                         hour.time = LocalTime.of(h, 0);
-                        hour.temperature = 18 + h * 0.4;
+                        hour.temperature = 10 + h * 0.4;
                         hour.type = WeatherData.WeatherType.RAINY;
                         return hour;
                     })
