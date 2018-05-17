@@ -53,6 +53,7 @@ public class MockWeatherDataProvider implements WeatherDataDownloader {
                         return hour;
                     })
                     .collect(Collectors.toList());
+            data.days.add(day);
         }
 
         observers.forEach(o -> o.acceptWeatherData(data));
