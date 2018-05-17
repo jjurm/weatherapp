@@ -11,35 +11,12 @@ import java.util.ArrayList;
 public class TemperatureOverviewImpl extends JPanel implements TemperatureOverview {
     final String DEGREE  = "\u00b0" + "C";
     private RightNowLabel temperatureLabel = new RightNowLabel(0);
-    private JLabel minTempLabel = new JLabel("Min Temperature: ");
-    private JLabel maxTempLabel = new JLabel("Max Temperature: ");
-    private JLabel feelsLikeLabel = new JLabel("Feels Like: ");
-    private JLabel windSpeedLabel = new JLabel("Wind Speed: ");
-    private JLabel humidityLabel = new JLabel("Humidity: ");
-    private JLabel precipitationLabel = new JLabel("Precipitation: ");
-    private JLabel sunriseLabel = new JLabel("Sunrise: ");
-    private JLabel sunsetLabel = new JLabel("Sunset: ");
+    private WeatherDetailsImpl weatherDetails = new WeatherDetailsImpl();
 
     public TemperatureOverviewImpl(){
-//        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setLayout(new GridLayout(0, 1));
-        ArrayList<JLabel> labels = new ArrayList<>();
-        JPanel detailsPanel = new JPanel();
-        labels.add(minTempLabel);
-        labels.add(maxTempLabel);
-        labels.add(feelsLikeLabel);
-        labels.add(windSpeedLabel);
-        labels.add(humidityLabel);
-        labels.add(precipitationLabel);
-        labels.add(sunriseLabel);
-        labels.add(sunsetLabel);
         add(temperatureLabel);
-        for(JLabel l : labels){
-            detailsPanel.add(l);
-//            l.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        }
-        add(detailsPanel);
+        add(weatherDetails);
 
     }
     @Override
@@ -49,16 +26,8 @@ public class TemperatureOverviewImpl extends JPanel implements TemperatureOvervi
 
     @Override
     public void acceptWeatherData(WeatherData data) {
-        // TODO
         temperatureLabel.update(data.actualTemperature, data.type.getImage());
-        minTempLabel.setText("Min Temperature: " + data.minTemperature + DEGREE);
-        maxTempLabel.setText("Max Temperature: " + data.maxTemperature + DEGREE);
-        feelsLikeLabel.setText("Feels Like: " + data.feelsLikeTemperature + DEGREE);
-        windSpeedLabel.setText("Wind Speed: " + data.windSpeed + DEGREE);
-        humidityLabel.setText("Humidity: " + data.humidity + "%");
-        precipitationLabel.setText("Precipitation: " + data.precipitation + "%");
-        sunriseLabel.setText("Sunrise: " + data.sunrise.toString());
-        sunsetLabel.setText("Sunset: " + data.sunset.toString());
+        weatherDetails.acceptWeatherData(data);
     }
     private class RightNowLabel extends JPanel{
         private JLabel rightNowLabel = new JLabel("Right Now");
