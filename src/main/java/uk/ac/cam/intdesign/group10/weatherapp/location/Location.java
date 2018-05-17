@@ -7,7 +7,7 @@ import java.net.*;
 public class Location {
 
     // example: "Cambridge, UK"
-    static ArrayList<String> cities;
+    /*static ArrayList<String> cities;
     
     static{
         cities = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Location {
           connection.disconnect();
         }
       }
-    }
+    }*/
     private String name;
     private String country, zmw, tz, tzs, path;
     private double latitude, longitude;
@@ -80,5 +80,8 @@ public class Location {
     }
     public String getName(){
         return name;
+    }
+    public String getLocation(){
+        return zmw;
     }
 }
