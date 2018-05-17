@@ -149,8 +149,14 @@ public class DayContentPanel extends JPanel implements ContentPanel {
     public void colourHourRows(WeatherData data) {
         
         for (HourRowImpl hr : rows) {
-            
-                hr.setBackground(setColor(estimations.get(hr)));
+                if(getHourInfo(hr, data).type.equals(WeatherType.RAINY)) {
+                	hr.setBackground(setColor((estimations.get(hr) - 0.2 > 0.0) ? estimations.get(hr) - 0.2 : 0.0 ));	
+                }
+                
+                else {
+                	hr.setBackground(setColor(estimations.get(hr) ));
+                }
+               
             
         }
 

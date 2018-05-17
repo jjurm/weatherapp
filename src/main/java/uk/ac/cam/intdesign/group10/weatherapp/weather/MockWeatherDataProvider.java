@@ -49,7 +49,7 @@ public class MockWeatherDataProvider implements WeatherDataDownloader {
                         WeatherData.HourInfo hour = new WeatherData.HourInfo();
                         hour.time = LocalTime.of(h, 0);
                         hour.temperature = 10 + h * 0.4;
-                        hour.type = WeatherData.WeatherType.RAINY;
+                        hour.type = WeatherData.WeatherType.CLOUDY;
                         return hour;
                     })
                     .collect(Collectors.toList());
