@@ -16,10 +16,10 @@ import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.Screen;
+import uk.ac.cam.intdesign.group10.weatherapp.screen.WelcomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.MockWeatherDataProvider;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloader;
-import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloaderImpl;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
@@ -45,7 +45,7 @@ public class WeatherApp extends JFrame implements LocationConsumer, WeatherDataD
         if (lastWeatherData != null) {
             currentScreen.acceptWeatherData(lastWeatherData);
         }
-        if (lastLocation != null) {
+        if (lastLocation != null && !(currentScreen instanceof WelcomeScreen)) {
             currentScreen.acceptLocation(lastLocation);
         }
 
