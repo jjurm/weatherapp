@@ -2,6 +2,7 @@ package uk.ac.cam.intdesign.group10.weatherapp.content;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -82,7 +84,9 @@ public class DayContentPanel extends JPanel implements ContentPanel {
             }
         }
         
+        
     }
+ 
 
     public HourInfo getHourInfo(HourRowImpl hr, WeatherData weatherData) {
         DayInfo dayInfo = weatherData.days.get(dayIndex);
@@ -106,7 +110,12 @@ public class DayContentPanel extends JPanel implements ContentPanel {
             jTemperature.setText(String.format("%.1f", hourTemperature) + " \u00b0" + "C");
             hr.add(jHours);
             hr.add(jTemperature);
-            hr.setBorder(new BevelBorder(BevelBorder.LOWERED));;
+            hr.setBorder(new BevelBorder(BevelBorder.LOWERED));
+            JLabel jImg = new JLabel();
+            BufferedImage img = hourInfo.type.getImage();
+        	ImageIcon icon = new ImageIcon(img);
+        	jImg.setIcon(icon);
+        	hr.add(jImg);
             rows.add(hr);
 
         }
