@@ -32,7 +32,7 @@ public class Header extends JPanel implements WeatherDataConsumer, LocationConsu
         toolbar = new ToolbarImpl();
         add(toolbar.getRootComponent());
 
-        tabbar = new TabBarImpl();
+        tabbar = new TabBarImpl(app, homeScreen);
         add(tabbar.getRootComponent());
     }
 
