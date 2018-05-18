@@ -238,13 +238,7 @@ public class WeatherDataDownloaderImpl implements WeatherDataDownloader
 			// Pad with nulled hours for past hours in the current day
 			for (int i = firstHour - 1; i >= 0; i--)
 			{
-				WeatherData.HourInfo thisHour = new WeatherData.HourInfo();
-				
-				thisHour.time = LocalTime.of(i, 0);
-				thisHour.temperature = null;
-				thisHour.type = null;
-				
-				data.days.get(0).hours.add(0, thisHour);
+				data.days.get(0).hours.add(null);
 			}
 			
 			observers.forEach(o -> o.acceptWeatherData(data));
