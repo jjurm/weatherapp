@@ -123,13 +123,13 @@ public class DayContentPanel extends JPanel implements ContentPanel {
 			}
 
 		}
-		estimationFunction();
+		estimationFunction(data);
 
 	}
     /* transfers all the temperatures that are not Double.NEGATIVE_INFINITY (corresponding to null) to an auxiliary hashmap
      * to scale them in range 0-1 so that color coding may be done
 	*/
-	public void estimationFunction() {
+	public void estimationFunction(WeatherData data) {
 		
 		Map<HourRowImpl, Double> auxiliary = new HashMap<HourRowImpl, Double>();
         for(HourRowImpl hr : estimations.keySet()) {
@@ -163,8 +163,18 @@ public class DayContentPanel extends JPanel implements ContentPanel {
 		double minimum = Collections.min(auxiliary.values());
 		double maximum = Collections.max(auxiliary.values());
 		for (HourRowImpl hr : auxiliary.keySet()) {
+			auxiliary.put(hr, (auxiliary.get(hr) - minimum) / (maximum - minimum));
+			if(getHourInfo(hr,data).type.equals(WeatherType.RAINY)) {
+				auxiliary.put(hr, auxiliary.get(hr) - 0.2);
+			}
+			
+		}
+		minimum = Collections.min(auxiliary.values());
+		maximum = Collections.max(auxiliary.values());
+		for (HourRowImpl hr : auxiliary.keySet()) {
 			auxiliary.put(hr, 1 - (auxiliary.get(hr) - minimum) / (maximum - minimum));
 			estimations.put(hr, auxiliary.get(hr));
+			
 		}
 
 	}
@@ -175,18 +185,14 @@ public class DayContentPanel extends JPanel implements ContentPanel {
 			if (getHourInfo(hr, data) == null) {
 				hr.setBackground(Color.GRAY);
 			} else {
-				if (getHourInfo(hr, data).type.equals(WeatherType.RAINY)) {
-					hr.setBackground(setColor((estimations.get(hr) - 0.2 > 0.0) ? estimations.get(hr) - 0.2 : 0.0));
-				}
-
-				else {
+				
 					hr.setBackground(setColor(estimations.get(hr)));
 				}
 
 			}
 		}
 
-	}
+	
 
 	public Color setColor(double est) {
 		// Hue
