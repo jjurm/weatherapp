@@ -2,6 +2,10 @@ package uk.ac.cam.intdesign.group10.weatherapp.component;
 
 import javax.swing.JComponent;
 
+import javafx.embed.swing.SwingNode;
+import javafx.scene.Node;
+import uk.ac.cam.intdesign.group10.weatherapp.component.test.FxComponent;
+
 /**
  * Interface for any modular component in the app. Usage might be as follows:
  *
@@ -12,7 +16,7 @@ import javax.swing.JComponent;
  *     }
  * </code>
  */
-public interface AppComponent {
+public interface AppComponent extends FxComponent {
 
     /**
      * As the class represents a physical component in the app, this method returns the (root)
@@ -21,5 +25,12 @@ public interface AppComponent {
      * @return
      */
     public JComponent getRootComponent();
+
+    @Override
+    public default Node getRootNode() {
+        SwingNode node = new SwingNode();
+        node.setContent(getRootComponent());
+        return node;
+    }
 
 }

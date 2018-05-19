@@ -8,13 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
+import uk.ac.cam.intdesign.group10.weatherapp.component.AppComponent;
 import uk.ac.cam.intdesign.group10.weatherapp.component.Header;
 import uk.ac.cam.intdesign.group10.weatherapp.content.ContentPanel;
 import uk.ac.cam.intdesign.group10.weatherapp.content.OverviewContentPanel;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
-public class HomeScreen extends JPanel implements Screen {
+public class HomeScreen extends JPanel implements Screen, AppComponent {
 
     private WeatherApp app;
     // we store the most recent WeatherData, so that it can be used instantly when we switch ContentPanel

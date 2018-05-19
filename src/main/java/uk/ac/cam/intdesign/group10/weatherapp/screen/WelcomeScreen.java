@@ -1,21 +1,21 @@
 package uk.ac.cam.intdesign.group10.weatherapp.screen;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import uk.ac.cam.intdesign.group10.weatherapp.LocationPickingDialog;
 import uk.ac.cam.intdesign.group10.weatherapp.LocationPickingDialogImpl;
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
+import uk.ac.cam.intdesign.group10.weatherapp.component.AppComponent;
 import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestComponent;
-import uk.ac.cam.intdesign.group10.weatherapp.location.AutomaticLocationDetector;
 import uk.ac.cam.intdesign.group10.weatherapp.location.AutomaticLocationDetectorImpl;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
-import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
-public class WelcomeScreen extends JPanel implements Screen{
+public class WelcomeScreen extends JPanel implements Screen, AppComponent {
 
     private WeatherApp app;
 
