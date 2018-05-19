@@ -1,23 +1,19 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
-import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestComponent;
+import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestFxComponent;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 
-public class ToolbarImpl extends JPanel implements Toolbar {
+public class ToolbarImpl extends BorderPane implements Toolbar {
 
     public ToolbarImpl() {
-        setLayout(new BorderLayout());
-        add(new TestComponent("Toolbar", Color.BLUE));
+        setCenter(new TestFxComponent("Toolbar", Color.LIGHTBLUE));
     }
 
     @Override
-    public JComponent getRootComponent() {
+    public Node getRootNode() {
         return this;
     }
 

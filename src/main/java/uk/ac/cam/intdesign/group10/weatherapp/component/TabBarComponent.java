@@ -1,71 +1,35 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
-import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+public class TabBarComponent extends BorderPane {
 
-public class TabBarComponent extends JPanel implements MouseListener
-{
-	private String title;
-	private Color background, activeBackground;
-	private TabBarImpl parent;
-	private int tabID;
-	
-	public void deactivate()
-	{
-		setBackground(background);
-	}
-	
-	public void activate()
-	{
-		setBackground(activeBackground);
-	}
-	
-	TabBarComponent(String text, Color bgc, Color activebgc, TabBarImpl p, int id)
-	{
-		add(new JLabel(text));
-        setBackground(bgc);
-        
+    private String title;
+    private TabBarImpl parent;
+    private int tabID;
+
+    public void deactivate() {
+        getStyleClass().remove("active");
+    }
+
+    public void activate() {
+        getStyleClass().add("active");
+    }
+
+    TabBarComponent(String text, TabBarImpl p, int id) {
+        Label label = new Label(text);
+        BorderPane.setMargin(label, new Insets(12, 0, 12, 0));
+        setCenter(label);
+        getStyleClass().add("tab");
+
         title = text;
-        background = bgc;
-        activeBackground = activebgc;
-        
+
         parent = p;
         tabID = id;
-        
-        addMouseListener(this);
-	}
 
-	@Override
-	public void mouseClicked(MouseEvent arg0)
-	{
-		parent.tabBarChange(tabID);
-	}
+        this.setOnMouseClicked(event -> parent.tabBarChange(tabID));
+    }
 
-	@Override
-	public void mouseEntered(MouseEvent arg0)
-	{
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0)
-	{
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0)
-	{
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0)
-	{
-		
-	}
 }

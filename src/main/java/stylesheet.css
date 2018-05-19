@@ -1,6 +1,6 @@
 .root {
-    -fx-base: #BCF0CF;
-    -fx-background: #EDF0DE;
+    -fx-base: #EDF0DE;
+    -fx-background-color: #BCF0CF;
     -fx-font-size: 12pt;
     -fx-font-family: "Century Gothic";
 }
@@ -17,6 +17,13 @@
     -fx-line-spacing: 0.8em;
 }
 
-button {
-
+.header {
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: black;
+}
+.tabbar {
+    -fx-background-color: rgb(192, 192, 192);
+}
+.tab.active {
+    -fx-background-color: white;
 }
