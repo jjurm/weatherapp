@@ -46,3 +46,10 @@
 .panel-overview .weather-details Label {
     -fx-padding: 4px;
 }
+
+.panel-day .hourrow {
+    -fx-border-style: solid;
+    -fx-border-width: 1px 0px 0px 0px;
+    -fx-border-color: rgba(0, 0, 0, 0.4);
+    -fx-padding: 10px;
+}

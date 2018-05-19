@@ -1,18 +1,15 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
 import java.util.Calendar;
-import java.util.List;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
-import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData.DayInfo;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData.HourInfo;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataConsumer;
 
-public class HourRowImpl extends JPanel implements HourRow, WeatherDataConsumer {
+public class HourRowImpl extends FlowPane implements HourRow, WeatherDataConsumer {
 
 	public WeatherData weatherData;
 	public int fromHour;
@@ -24,10 +21,13 @@ public class HourRowImpl extends JPanel implements HourRow, WeatherDataConsumer 
 		fromHour = startHourOfROw;
 		toHour = endHourOfRow;
 
+		getStyleClass().add("hourrow");
+
+		setHgap(40);
 	}
 
-	public JLabel hoursLabel() {
-		JLabel jHour = new JLabel();
+	public Label hoursLabel() {
+		Label jHour = new Label();
 		if (fromHour < 10) {
 			if (toHour < 10) {
 				jHour.setText("0" + String.valueOf(fromHour) + " - " + "0" + String.valueOf(toHour));
@@ -43,14 +43,14 @@ public class HourRowImpl extends JPanel implements HourRow, WeatherDataConsumer 
 
 	}
 
-	public JLabel temperatureLabel() {
-		JLabel jTemperature = new JLabel();
+	public Label temperatureLabel() {
+		Label jTemperature = new Label();
 
 		return jTemperature;
 	}
 
 	@Override
-	public JComponent getRootComponent() {
+	public Node getRootNode() {
 		return this;
 	}
 
