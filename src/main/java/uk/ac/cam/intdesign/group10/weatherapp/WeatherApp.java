@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -110,7 +111,7 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
         lastWeatherData = data;
 
         // notify the screen
-        currentScreen.acceptWeatherData(data);
+        Platform.runLater(() -> currentScreen.acceptWeatherData(data));
     }
 
     @Override

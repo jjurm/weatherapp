@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+import uk.ac.cam.intdesign.group10.weatherapp.component.AppComponent;
 import uk.ac.cam.intdesign.group10.weatherapp.component.HourRowImpl;
 import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestComponent;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
@@ -23,7 +24,7 @@ import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData.DayInfo;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData.HourInfo;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData.WeatherType;
 
-public class DayContentPanel extends JPanel implements ContentPanel {
+public class DayContentPanel extends JPanel implements ContentPanel, AppComponent {
 
 	public List<HourRowImpl> rows;
 	public Map<HourRowImpl, Double> estimations = new HashMap<>();
@@ -37,12 +38,12 @@ public class DayContentPanel extends JPanel implements ContentPanel {
 
 	}
 
-	@Override
-	public JComponent getRootComponent() {
-		return this;
-	}
+    @Override
+    public JComponent getRootComponent() {
+        return this;
+    }
 
-	@Override
+    @Override
 	public void acceptWeatherData(WeatherData data) {
 		putContentInPanel(data);
 
@@ -130,16 +131,16 @@ public class DayContentPanel extends JPanel implements ContentPanel {
      * to scale them in range 0-1 so that color coding may be done
 	*/
 	public void estimationFunction(WeatherData data) {
-		
+
 		Map<HourRowImpl, Double> auxiliary = new HashMap<HourRowImpl, Double>();
         for(HourRowImpl hr : estimations.keySet()) {
         	if(estimations.get(hr) != Double.NEGATIVE_INFINITY) {
         		auxiliary.put(hr, estimations.get(hr));
-        		
+
         	}
         }
-    
-        
+
+
 		double mean = 0.0;
 		double variance = 0.0;
 		for (HourRowImpl hr : auxiliary.keySet()) {
@@ -167,14 +168,14 @@ public class DayContentPanel extends JPanel implements ContentPanel {
 			if(getHourInfo(hr,data).type.equals(WeatherType.RAINY)) {
 				auxiliary.put(hr, auxiliary.get(hr) - 0.2);
 			}
-			
+
 		}
 		minimum = Collections.min(auxiliary.values());
 		maximum = Collections.max(auxiliary.values());
 		for (HourRowImpl hr : auxiliary.keySet()) {
 			auxiliary.put(hr, 1 - (auxiliary.get(hr) - minimum) / (maximum - minimum));
 			estimations.put(hr, auxiliary.get(hr));
-			
+
 		}
 
 	}
@@ -185,14 +186,14 @@ public class DayContentPanel extends JPanel implements ContentPanel {
 			if (getHourInfo(hr, data) == null) {
 				hr.setBackground(Color.GRAY);
 			} else {
-				
+
 					hr.setBackground(setColor(estimations.get(hr)));
 				}
 
 			}
 		}
 
-	
+
 
 	public Color setColor(double est) {
 		// Hue

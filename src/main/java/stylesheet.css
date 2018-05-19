@@ -17,6 +17,8 @@
     -fx-line-spacing: 0.8em;
 }
 
+/* Header */
+
 .header {
     -fx-border-width: 0px 0px 2px 0px;
     -fx-border-color: black;
@@ -26,4 +28,21 @@
 }
 .tab.active {
     -fx-background-color: white;
+}
+
+/* Content */
+.panel-overview {
+    -fx-padding: 20px;
+}
+.panel-overview .temp-rightnow {
+    -fx-font-size: 50pt;
+    -fx-alignment: center;
+}
+.panel-overview ImageView {
+    -fx-scale-x: 0.6;
+    -fx-scale-y: 0.6;
+    -fx-scale-z: 0.6;
+}
+.panel-overview .weather-details Label {
+    -fx-padding: 4px;
 }

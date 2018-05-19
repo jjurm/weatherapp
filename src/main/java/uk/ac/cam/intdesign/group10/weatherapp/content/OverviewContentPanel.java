@@ -1,39 +1,34 @@
 package uk.ac.cam.intdesign.group10.weatherapp.content;
 
-import java.awt.Color;
-
-import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
+import uk.ac.cam.intdesign.group10.weatherapp.component.TemperatureOverview;
 import uk.ac.cam.intdesign.group10.weatherapp.component.TemperatureOverviewImpl;
-import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestRowWithButtons;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
-public class OverviewContentPanel extends JPanel implements ContentPanel {
+public class OverviewContentPanel extends VBox implements ContentPanel {
 
     private WeatherApp app;
     private HomeScreen homeScreen;
 
-    private final TemperatureOverviewImpl temperatureOverview;
+    private final TemperatureOverview temperatureOverview;
 
     public OverviewContentPanel(WeatherApp app, HomeScreen homeScreen) {
         this.app = app;
         this.homeScreen = homeScreen;
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(Color.BLACK);
+        getStyleClass().add("panel-overview");
 
         temperatureOverview = new TemperatureOverviewImpl();
-        add(temperatureOverview);
+        getChildren().add(temperatureOverview.getRootNode());
 
-        add(new TestRowWithButtons(app, homeScreen));
+        //getChildren().add(new TestRowWithButtons(app, homeScreen));
     }
 
     @Override
-    public JComponent getRootComponent() {
+    public Node getRootNode() {
         return this;
     }
 

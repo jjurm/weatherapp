@@ -1,23 +1,28 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
-import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
-
-import javax.swing.*;
 import java.util.ArrayList;
 
-public class WeatherDetailsImpl extends JPanel implements WeatherDetails{
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
+
+public class WeatherDetailsImpl extends VBox implements WeatherDetails{
     final String DEGREE  = "\u00b0" + "C";
-    private JLabel minTempLabel = new JLabel("Min Temperature: ");
-    private JLabel maxTempLabel = new JLabel("Max Temperature: ");
-    private JLabel feelsLikeLabel = new JLabel("Feels Like: ");
-    private JLabel windSpeedLabel = new JLabel("Wind Speed: ");
-    private JLabel humidityLabel = new JLabel("Humidity: ");
-    private JLabel precipitationLabel = new JLabel("Precipitation: ");
-    private JLabel sunriseLabel = new JLabel("Sunrise: ");
-    private JLabel sunsetLabel = new JLabel("Sunset: ");
+    private Label minTempLabel = new Label("Min Temperature: ");
+    private Label maxTempLabel = new Label("Max Temperature: ");
+    private Label feelsLikeLabel = new Label("Feels Like: ");
+    private Label windSpeedLabel = new Label("Wind Speed: ");
+    private Label humidityLabel = new Label("Humidity: ");
+    private Label precipitationLabel = new Label("Precipitation: ");
+    private Label sunriseLabel = new Label("Sunrise: ");
+    private Label sunsetLabel = new Label("Sunset: ");
+
     public WeatherDetailsImpl(){
 
-        ArrayList<JLabel> labels = new ArrayList<>();
+        getStyleClass().add("weather-details");
+
+        ArrayList<Label> labels = new ArrayList<>();
         labels.add(minTempLabel);
         labels.add(maxTempLabel);
         labels.add(feelsLikeLabel);
@@ -26,15 +31,16 @@ public class WeatherDetailsImpl extends JPanel implements WeatherDetails{
         labels.add(precipitationLabel);
         labels.add(sunriseLabel);
         labels.add(sunsetLabel);
-        for(JLabel l : labels){
-            add(l);
+        for(Label l : labels){
+            getChildren().add(l);
 //            l.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         }
     }
+
     @Override
-    public JComponent getRootComponent() {
-        return null;
+    public Node getRootNode() {
+        return this;
     }
 
     @Override
