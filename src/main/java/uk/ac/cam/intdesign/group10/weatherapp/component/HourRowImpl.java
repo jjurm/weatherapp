@@ -1,64 +1,86 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
-import java.util.Calendar;
+import java.util.Map;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData.HourInfo;
-import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataConsumer;
 
-public class HourRowImpl extends FlowPane implements HourRow, WeatherDataConsumer {
+public class HourRowImpl extends HBox implements HourRow {
 
-	public WeatherData weatherData;
-	public int fromHour;
-	public int toHour;
-	public int day = Calendar.DAY_OF_MONTH;
-	public HourInfo hour;
+    private int fromHour;
+    private int toHour;
+    private Label jTemperature;
+    private ImageView imgView;
 
-	public HourRowImpl(int startHourOfROw, int endHourOfRow) {
-		fromHour = startHourOfROw;
-		toHour = endHourOfRow;
+    public HourRowImpl(int startHourOfROw, int endHourOfRow) {
+        fromHour = startHourOfROw;
+        toHour = endHourOfRow;
 
-		getStyleClass().add("hourrow");
+        getStyleClass().add("hourrow");
+        setAlignment(Pos.CENTER_LEFT);
+        setSpacing(40);
 
-		setHgap(40);
-	}
+        createComponents();
+    }
 
-	public Label hoursLabel() {
-		Label jHour = new Label();
-		if (fromHour < 10) {
-			if (toHour < 10) {
-				jHour.setText("0" + String.valueOf(fromHour) + " - " + "0" + String.valueOf(toHour));
-			} else {
+    private void createComponents() {
+        Label jHours = new Label();
+        jHours.setText(String.format("%02d – %02d", fromHour, toHour));
+        jTemperature = new Label();
+        imgView = new ImageView();
+        getChildren().add(jHours);
+        getChildren().add(jTemperature);
+        imgView.setFitWidth(32);
+        imgView.setFitHeight(32);
+        getChildren().add(imgView);
+    }
 
-				jHour.setText("0" + String.valueOf(fromHour) + " - " + String.valueOf(toHour));
+    @Override
+    public Node getRootNode() {
+        return this;
+    }
 
-			}
-		} else {
-			jHour.setText(String.valueOf(fromHour) + " - " + String.valueOf(toHour));
-		}
-		return jHour;
+    public void acceptWeatherData(WeatherData.DayInfo data, Map<HourInfo, Double> estimations) {
+        HourInfo hourInfo = data.hours.get(fromHour);
+        Double estimatedValue = estimations.get(hourInfo);
 
-	}
+        if (hourInfo != null) {
+            double hourTemperature = hourInfo.temperature;
+            jTemperature.setText(String.format("%.1f", hourTemperature) + " \u00b0" + "C");
+            imgView.setImage(SwingFXUtils.toFXImage(hourInfo.type.getImage(), null));
+        }
 
-	public Label temperatureLabel() {
-		Label jTemperature = new Label();
+        colourRow(estimatedValue);
+    }
 
-		return jTemperature;
-	}
+    private void colourRow(Double estimatedValue) {
+        if (estimatedValue == null) {
+            setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        } else {
+            setBackground(new Background(new BackgroundFill(setColor(estimatedValue), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+    }
 
-	@Override
-	public Node getRootNode() {
-		return this;
-	}
-
-	@Override
-	public void acceptWeatherData(WeatherData data) {
-
-		weatherData = data;
-
-	}
+    private Color setColor(double est) {
+        // Hue
+        double h = est * 0.3;
+        // Saturation
+        double s = 0.9;
+        // Brightness
+        double b = 0.9;
+        // hue is in degrees
+        return Color.hsb(h * 360, s, b);
+    }
 
 }

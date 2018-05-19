@@ -10,7 +10,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
-import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.Screen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.WelcomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.MockWeatherDataProvider;
@@ -57,12 +56,11 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
         primaryStage.setTitle("Weather app");
 
         createUiComponents(primaryStage);
-        changeScreen(new HomeScreen(this));
+        changeScreen(new WelcomeScreen(this));
+        //changeScreen(new HomeScreen(this));
 
-        // TODO
         weatherDataDownloader = new MockWeatherDataProvider();
         weatherDataDownloader.subscribe(this);
-
 
         lastLocation = new Location("UK/London");
         weatherDataDownloader.fetchData(lastLocation);

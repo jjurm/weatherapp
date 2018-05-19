@@ -38,15 +38,13 @@
     -fx-font-size: 50pt;
     -fx-alignment: center;
 }
-.panel-overview ImageView {
-    -fx-scale-x: 0.6;
-    -fx-scale-y: 0.6;
-    -fx-scale-z: 0.6;
-}
 .panel-overview .weather-details Label {
     -fx-padding: 4px;
 }
 
+.panel-day .suggested-time {
+    -fx-padding: 10px;
+}
 .panel-day .hourrow {
     -fx-border-style: solid;
     -fx-border-width: 1px 0px 0px 0px;

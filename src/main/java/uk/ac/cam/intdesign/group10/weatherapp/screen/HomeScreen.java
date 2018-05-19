@@ -1,8 +1,8 @@
 package uk.ac.cam.intdesign.group10.weatherapp.screen;
 
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
 import uk.ac.cam.intdesign.group10.weatherapp.component.Header;
 import uk.ac.cam.intdesign.group10.weatherapp.content.ContentPanel;
@@ -29,7 +29,9 @@ public class HomeScreen extends BorderPane implements Screen {
         // push last weather data to new content panel
         if (lastWeatherData != null) {
             currentContentPanel.acceptWeatherData(lastWeatherData);
+            currentContentPanel.acceptWeatherData(lastWeatherData);
         }
+
         contentPanelHolder.setContent(contentPanel.getRootNode());
     }
 
@@ -40,13 +42,14 @@ public class HomeScreen extends BorderPane implements Screen {
         setTop(header.getRootNode());
 
         contentPanelHolder = new ScrollPane();
+        contentPanelHolder.setFitToWidth(true);
         setCenter(contentPanelHolder);
 
         changeContentPanel(new OverviewContentPanel(app, this));
     }
 
     @Override
-    public Node getRootNode() {
+    public Pane getRootNode() {
         return this;
     }
 
