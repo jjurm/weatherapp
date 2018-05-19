@@ -77,12 +77,8 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
 
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(event -> {
-            try {
-                stop();
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.exit(1);
-            }
+            Platform.exit();
+            System.exit(0);
         });
         primaryStage.show();
     }
