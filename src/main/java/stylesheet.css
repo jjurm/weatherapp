@@ -1,6 +1,22 @@
 .root {
-    /*-fx-font-size: 16pt;*/
-    /*-fx-font-family: "Courier New";*/
-    -fx-base: rgb(132, 145, 47);
-    -fx-background: rgb(225, 228, 203);
+    -fx-base: #BCF0CF;
+    -fx-background: #EDF0DE;
+    -fx-font-size: 12pt;
+    -fx-font-family: "Century Gothic";
+}
+
+.h1, .h2 {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+.h1 {
+    -fx-font-size: 24pt;
+}
+.h2 {
+    -fx-font-size: 16pt;
+    -fx-line-spacing: 0.8em;
+}
+
+button {
+
 }

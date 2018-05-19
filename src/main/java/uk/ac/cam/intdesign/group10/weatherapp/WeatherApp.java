@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.Screen;
-import uk.ac.cam.intdesign.group10.weatherapp.screen.TestScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.WelcomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.MockWeatherDataProvider;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
@@ -30,6 +29,9 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
     private Screen currentScreen;
     private StackPane screenHolder;
 
+    /**
+     * Changes screen and pushes last received WeatherData and Location to the screen
+     */
     public void changeScreen(Screen screen) {
         screenHolder.getChildren().clear();
         currentScreen = screen;
@@ -44,7 +46,8 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
     }
 
     public void openLocationPickingDialog() {
-        // TODO
+        LocationPickingDialogImpl dialog = new LocationPickingDialogImpl();
+        dialog.subscribe(this);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
         primaryStage.setTitle("Weather app");
 
         createUiComponents(primaryStage);
-        changeScreen(new TestScreen());
+        changeScreen(new WelcomeScreen(this));
 
         // TODO
         weatherDataDownloader = new MockWeatherDataProvider();
