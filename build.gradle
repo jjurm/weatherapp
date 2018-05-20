@@ -8,8 +8,22 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = 1.9
+
+mainClassName = "uk.ac.cam.intdesign.group10.weatherapp.WeatherApp"
+
+sourceSets {
+    main {
+        java {
+            srcDirs= ["src/main/java"]
+        }
+        resources {
+            srcDirs= ["src/main/resources"]
+        }
+    }
+}
 
 repositories {
     mavenCentral()
