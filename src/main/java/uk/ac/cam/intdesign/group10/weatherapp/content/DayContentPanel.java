@@ -9,6 +9,7 @@ import java.util.Optional;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import uk.ac.cam.intdesign.group10.weatherapp.component.DaySummaryImpl;
 import uk.ac.cam.intdesign.group10.weatherapp.component.HourRowImpl;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.SuitabilityEstimator;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.SuitabilityEstimatorImpl;
@@ -22,6 +23,7 @@ public class DayContentPanel extends VBox implements ContentPanel {
     private List<HourRowImpl> rows = new ArrayList<>();
     private int dayIndex;
     private Label lblSuggestedTime;
+    private DaySummaryImpl daySummary;
 
     public DayContentPanel(int dayIndex) {
         this.dayIndex = dayIndex;
@@ -37,6 +39,8 @@ public class DayContentPanel extends VBox implements ContentPanel {
 
     private void createComponents() {
         // only create components once when DayContentPanel is created, don't fill with content
+        daySummary = new DaySummaryImpl(dayIndex);
+        getChildren().add(daySummary);
         lblSuggestedTime = new Label("Suggested time:");
         lblSuggestedTime.getStyleClass().add("suggested-time");
         getChildren().add(lblSuggestedTime);
@@ -64,6 +68,8 @@ public class DayContentPanel extends VBox implements ContentPanel {
 
         // delegate each row's responsibility to that row
         rows.forEach(row -> row.acceptWeatherData(dayInfo, estimations));
+        daySummary.acceptWeatherData(data);
+
     }
 
 }
