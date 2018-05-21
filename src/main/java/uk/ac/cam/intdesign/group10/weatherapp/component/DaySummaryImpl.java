@@ -1,5 +1,6 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -33,6 +34,7 @@ public class DaySummaryImpl extends GridPane implements DaySummary {
         weatherTypeLabel.setText(data.type.getDescription());
         temperatureLabel.setText(data.maxTemperature + DEGREE);
         dateLabel.setText(dayInfo.day.toString());
+        image.setImage(SwingFXUtils.toFXImage(data.type.getImage(), null));
     }
 
     @Override
