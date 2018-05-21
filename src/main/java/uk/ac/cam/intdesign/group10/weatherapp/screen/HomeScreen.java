@@ -42,6 +42,7 @@ public class HomeScreen extends BorderPane implements Screen {
         setTop(header.getRootNode());
 
         contentPanelHolder = new ScrollPane();
+        contentPanelHolder.getStyleClass().add("content");
         contentPanelHolder.setFitToWidth(true);
         setCenter(contentPanelHolder);
 

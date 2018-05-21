@@ -1,6 +1,15 @@
+/*
+
+    Color Palette
+    (monochromatic colors)
+    chosen using Adobe Color CC
+    https://color.adobe.com/create/color-wheel/?base=2&rule=Monochromatic&selected=4&name=My%20Color%20Theme&mode=rgb&rgbvalues=0.317729132152027,0.05948256017344611,0.5,0.7595878796398775,0.41896512034689226,1,0.635458264304054,0.11896512034689222,1,0.37979393981993875,0.20948256017344613,0.5,0.5083666114432432,0.09517209627751377,0.8&swatchOrder=0,1,2,3,4
+
+ */
+
 .root {
-    -fx-base: #EDF0DE;
-    -fx-background-color: #BCF0CF;
+    -fx-base: #8218CC;
+    -fx-background-color: #C26BFF;
     -fx-font-size: 12pt;
     -fx-font-family: "Century Gothic";
 }
@@ -24,10 +33,11 @@
     -fx-border-color: black;
 }
 .tabbar {
-    -fx-background-color: rgb(192, 192, 192);
+
 }
 .tab.active {
-    -fx-background-color: white;
+    /* Main colour */
+    -fx-background-color: #A21EFF;
 }
 
 /* Content */
