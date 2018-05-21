@@ -13,14 +13,7 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
     final static String apiCall = "http://autocomplete.wunderground.com/aq?h=0&query=";
     private static JsonArray cities;
     private double latitude, longitude;
-    static{
-        try {
-            getAutocompleteSuggestions();
-        } catch(IOException ex){
-
-        }
-    }
-
+    private String apiName;
     /**
      * Calculate distance between two points in latitude and longitude taking
      * into account height difference. If you are not interested in height
@@ -47,13 +40,18 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
     @Override
     public Location detectLocation() {
         getLocation();
+        System.out.println(latitude + " " + longitude);
+        try{
+            getAutocompleteSuggestions();
+        } catch(IOException ex){
+
+        }
         Location loc = closestLocation();
         loc.debug();
         return loc;
     }
 
     private Location closestLocation() {
-        //TODO: has to be fixed
         double closestDist = Double.MAX_VALUE;
         Location best = null;
         for(JsonElement city : cities){
@@ -63,6 +61,7 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
                     latitude,
                     longitude
             );
+            System.out.println(city.getAsJsonObject().get("name").getAsString() + " " + dist);
             if(dist < closestDist){
                 closestDist = dist;
                 best = parseLocation(city.getAsJsonObject());
@@ -93,6 +92,7 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
         }
         latitude = locJSON.get("lat").getAsDouble();
         longitude = locJSON.get("lon").getAsDouble();
+        apiName = locJSON.get("city").getAsString();
         //System.out.println("lat: " + latitude + " long: " + longitude);
     }
 
@@ -105,7 +105,7 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
         return jp.parse(new InputStreamReader((InputStream) request.getContent()));
     }
 
-    private static void getAutocompleteSuggestions() throws JsonIOException, java.io.IOException{
-        cities = readJsonFromURL(apiCall).getAsJsonObject().get("RESULTS").getAsJsonArray();
+    private void getAutocompleteSuggestions() throws JsonIOException, java.io.IOException{
+        cities = readJsonFromURL(apiCall + apiName).getAsJsonObject().get("RESULTS").getAsJsonArray();
     }
 }
