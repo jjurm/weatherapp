@@ -28,7 +28,7 @@ public class TabBarImpl extends HBox implements TabBar
         getStyleClass().add("tabbar");
         
     	LocalDate date = LocalDate.now().plusDays(2);
-    	String DoW = date.getDayOfWeek().toString().substring(0, 1) + date.getDayOfWeek().toString().substring(1, date.getDayOfWeek().toString().length()).toLowerCase();
+    	String DoW = getStringDayOf(date);
     	
     	tabs = new LinkedList<>();
     	
@@ -37,7 +37,7 @@ public class TabBarImpl extends HBox implements TabBar
     	tabs.add(new TabBarComponent("Tomorrow", this, 2));
     	tabs.add(new TabBarComponent(DoW, this, 3));
     	date = date.plusDays(1);
-        DoW = date.getDayOfWeek().toString().substring(0, 1) + date.getDayOfWeek().toString().substring(1, date.getDayOfWeek().toString().length()).toLowerCase();
+        DoW = getStringDayOf(date);
     	tabs.add(new TabBarComponent(DoW, this, 4));
     	
     	for (TabBarComponent tab : tabs)
@@ -49,6 +49,11 @@ public class TabBarImpl extends HBox implements TabBar
     	
     	tabs.get(0).activate();
     }
+
+	private String getStringDayOf(LocalDate date) {
+		String dow = date.getDayOfWeek().toString();
+		return  dow.substring(0, 1) + dow.substring(1, 3).toLowerCase();
+	}
     
     public void tabBarChange(int id)
     {
