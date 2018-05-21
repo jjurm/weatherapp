@@ -14,15 +14,25 @@ public class DaySummaryImpl extends GridPane implements DaySummary {
     private Label temperatureLabel = new Label();
     private ImageView image = new ImageView();
     private Label dateLabel = new Label();
+    final String DEGREE  = "\u00b0" + "C";
+    private WeatherData.DayInfo dayInfo;
 
-    public DaySummaryImpl(){
+    public DaySummaryImpl(WeatherData.DayInfo dayInfo){
         setHgap(20);
+        this.dayInfo = dayInfo;
+        GridPane.setConstraints(dateLabel, 0, 0);
+        GridPane.setConstraints(image, 1, 0);
+        GridPane.setConstraints(weatherTypeLabel, 0, 1);
+        GridPane.setConstraints(temperatureLabel, 1, 1);
+        getChildren().addAll(weatherTypeLabel, temperatureLabel, image, dateLabel);
+
     }
 
     @Override
     public void acceptWeatherData(WeatherData data) {
         weatherTypeLabel.setText(data.type.getDescription());
-
+        temperatureLabel.setText(data.maxTemperature + DEGREE);
+        dateLabel.setText(dayInfo.day.toString());
     }
 
     @Override
