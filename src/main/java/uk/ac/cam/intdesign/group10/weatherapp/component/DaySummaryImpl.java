@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
 import javax.swing.*;
+import java.time.LocalDate;
 
 public class DaySummaryImpl extends GridPane implements DaySummary {
     private Label weatherTypeLabel = new Label();
@@ -16,11 +17,12 @@ public class DaySummaryImpl extends GridPane implements DaySummary {
     private ImageView image = new ImageView();
     private Label dateLabel = new Label();
     final String DEGREE  = "\u00b0" + "C";
-    private WeatherData.DayInfo dayInfo;
-
-    public DaySummaryImpl(WeatherData.DayInfo dayInfo){
+    private int dayIndex;
+    public DaySummaryImpl(int dayIndex){
         setHgap(20);
-        this.dayInfo = dayInfo;
+        this.dayIndex = dayIndex;
+        image.setFitHeight(72);
+        image.setFitWidth(72);
         GridPane.setConstraints(dateLabel, 0, 0);
         GridPane.setConstraints(image, 1, 0);
         GridPane.setConstraints(weatherTypeLabel, 0, 1);
@@ -32,8 +34,9 @@ public class DaySummaryImpl extends GridPane implements DaySummary {
     @Override
     public void acceptWeatherData(WeatherData data) {
         weatherTypeLabel.setText(data.type.getDescription());
-        temperatureLabel.setText(data.maxTemperature + DEGREE);
-        dateLabel.setText(dayInfo.day.toString());
+        temperatureLabel.setText(data.maxTemperature.toString() + DEGREE);
+        LocalDate day = data.days.get(dayIndex).day;
+        dateLabel.setText(day.getDayOfWeek().toString() + ", " + day.getDayOfMonth() + " " + day.getMonth().toString());
         image.setImage(SwingFXUtils.toFXImage(data.type.getImage(), null));
     }
 
