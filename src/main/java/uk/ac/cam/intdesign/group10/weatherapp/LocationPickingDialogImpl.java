@@ -75,8 +75,8 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
             jsonObject.get("lat").getAsDouble(),
             jsonObject.get("lon").getAsDouble()
         );
-
     }
+
     private Location getLocation(String text) {
         JsonArray jsonList = cities.get("RESULTS").getAsJsonArray();
         for(JsonElement entry : jsonList){
@@ -85,8 +85,7 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
         return null;
     }
 
-    private JsonElement readJsonFromURL(String stringUrl) throws JsonIOException, JsonSyntaxException, IOException
-    {
+    private JsonElement readJsonFromURL(String stringUrl) throws JsonIOException, JsonSyntaxException, IOException {
         URL url = new URL(stringUrl);
         URLConnection request = url.openConnection();
         request.connect();
@@ -96,7 +95,7 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
 
     private void getAutocompleteSuggestions(String prefix) throws JsonIOException, java.io.IOException{
         cities = readJsonFromURL(getURL(prefix)).getAsJsonObject();
-        System.out.println(cities.toString());
+        //System.out.println(cities.toString());
         JsonArray jsonList = cities.get("RESULTS").getAsJsonArray();
         autocomplete = new ArrayList<>();
         for(JsonElement entry : jsonList){
@@ -112,7 +111,7 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
     }
 
     private void notifyEveryone(Location location){
-        location.debug();
+        //location.debug();
         for(LocationConsumer obs : observers){
             obs.acceptLocation(location);
         }
