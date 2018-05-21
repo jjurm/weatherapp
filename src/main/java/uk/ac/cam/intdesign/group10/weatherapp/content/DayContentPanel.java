@@ -59,7 +59,7 @@ public class DayContentPanel extends VBox implements ContentPanel {
         Optional<HourInfo> max = estimations.keySet().stream().max(Comparator.comparing(estimations::get));
         if (max.isPresent()) {
             int h1 = max.get().time.getHour();
-            lblSuggestedTime.setText(String.format("Suggested time: %2d – %2d", h1, h1+1));
+            lblSuggestedTime.setText(String.format("Suggested time: %2d - %2d", h1, h1+1));
         }
 
         // delegate each row's responsibility to that row

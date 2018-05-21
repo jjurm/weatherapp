@@ -36,7 +36,7 @@ public class HourRowImpl extends HBox implements HourRow {
 
     private void createComponents() {
         Label jHours = new Label();
-        jHours.setText(String.format("%02d – %02d", fromHour, toHour));
+        jHours.setText(String.format("%02d - %02d", fromHour, toHour));
         jTemperature = new Label();
         imgView = new ImageView();
         getChildren().add(jHours);
