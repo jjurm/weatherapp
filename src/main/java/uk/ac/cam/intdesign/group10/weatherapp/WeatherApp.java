@@ -49,6 +49,7 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
     public void openLocationPickingDialog() {
         LocationPickingDialogImpl dialog = new LocationPickingDialogImpl();
         dialog.subscribe(this);
+        dialog.openDialog();
     }
 
     @Override

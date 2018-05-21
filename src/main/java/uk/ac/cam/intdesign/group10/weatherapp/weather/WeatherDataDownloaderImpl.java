@@ -89,6 +89,7 @@ public class WeatherDataDownloaderImpl implements WeatherDataDownloader
     
     WeatherData.WeatherType mapWeatherType(String weatherIcon)
     {
+    	//TODO: Possible error with checking string equality using ==
     	if ( weatherIcon.substring(0, 2) == "nt" ) //No special icons for nighttime
     		weatherIcon = weatherIcon.substring(3, weatherIcon.length());
     	
