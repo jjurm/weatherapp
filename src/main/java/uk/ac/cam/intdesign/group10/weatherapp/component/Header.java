@@ -24,7 +24,7 @@ public class Header extends VBox implements WeatherDataConsumer, LocationConsume
 
         getStyleClass().add("header");
 
-        toolbar = new ToolbarImpl();
+        toolbar = new ToolbarImpl(app);
         getChildren().add(toolbar.getRootNode());
 
         tabbar = new TabBarImpl(app, homeScreen);

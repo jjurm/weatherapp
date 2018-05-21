@@ -52,7 +52,7 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
     }
 
     private Location closestLocation() {
-        double closestDist = Double.MAX_VALUE;
+            double closestDist = Double.MAX_VALUE;
         Location best = null;
         for(JsonElement city : cities){
             double dist = distance(
