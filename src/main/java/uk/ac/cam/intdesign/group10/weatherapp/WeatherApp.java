@@ -55,6 +55,7 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Weather app");
+        primaryStage.setResizable(false);
 
         createUiComponents(primaryStage);
         changeScreen(new WelcomeScreen(this));
