@@ -2,6 +2,9 @@ package uk.ac.cam.intdesign.group10.weatherapp.weather;
 
 import java.util.Map;
 
+/**
+ * Calculates how suitable a weather condition is for running.
+ */
 public interface SuitabilityEstimator {
 
     /**
