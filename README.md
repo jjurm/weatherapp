@@ -37,3 +37,7 @@ We used the **Gradle** build tool to build the project, manage dependencies, bui
 The following libraries are used (listed as dependencies in the `build.gradle` file)
 
 - [Google Gson](https://github.com/google/gson)
+
+### Graphics
+
+Icon made by [Pixel Buddha](https://www.flaticon.com/authors/pixel-buddha) from [www.flaticon.com](https://www.flaticon.com/packs/weather-6) 

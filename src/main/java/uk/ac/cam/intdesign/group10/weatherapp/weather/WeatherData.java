@@ -39,12 +39,12 @@ public class WeatherData {
     }
 
     public static enum WeatherType {
-        SUNNY("Sunny", "016-sun.png"),
-        RAINY("Rainy", "011-raining.png"),
-        PARTLY_CLOUDY("Partly cloudy", "014-cloudy.png"),
-        CLOUDY("Cloudy", "013-cloud.png"),
-        SNOWY("Snowy", "011-raining.png"),
-        LIGHTNING("Lightning", "010-storm.png");
+        SUNNY("Sunny", "014-sun.png"),
+        RAINY("Rainy", "001-rain-3.png"),
+        PARTLY_CLOUDY("Partly cloudy", "015-cloudy.png"),
+        CLOUDY("Cloudy", "018-cloud.png"),
+        SNOWY("Snowy", "004-snowing-1.png"),
+        LIGHTNING("Lightning", "013-storm.png");
 
         private String description;
 
