@@ -1,7 +1,14 @@
 package uk.ac.cam.intdesign.group10.weatherapp;
 
 import com.google.gson.*;
-import javafx.scene.control.ComboBox;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.*;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 
@@ -16,8 +23,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LocationPickingDialogImpl implements LocationPickingDialog{
     private List<LocationConsumer> observers = new ArrayList<>();
@@ -26,40 +35,44 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
     final String apiCall = "http://autocomplete.wunderground.com/aq?h=0&query=";
     @Override
     public void openDialog() {
-        JTextField nameField = new JTextField();
-        JComboBox autocompleteBox = new JComboBox();
-        nameField.getDocument().addDocumentListener(new DocumentListener() {
+        TextField nameField = new TextField();
+        ComboBox autocompleteBox = new ComboBox();
+        autocompleteBox.getItems().add("Cambridge, United Kingdom");
+        nameField.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                fill();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                fill();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                fill();
-            }
-
-            private void fill(){
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 String currentText = nameField.getText();
                 try{
                     getAutocompleteSuggestions(currentText);
                 } catch(IOException ex){
 
                 }
-                autocompleteBox.removeAllItems();
-                for(String sugg : autocomplete)
-                    autocompleteBox.addItem(sugg);
+                autocompleteBox.getItems().clear();
+                autocompleteBox.getItems().addAll(autocomplete);
+                autocompleteBox.getSelectionModel().selectFirst();
             }
         });
-        final JComponent[] inputs = new JComponent[]{new JLabel("Choose your city:"), nameField, autocompleteBox};
-        int result = JOptionPane.showConfirmDialog(null, inputs, "Pick a location", JOptionPane.PLAIN_MESSAGE);
-        if(result == JOptionPane.OK_OPTION){
-            Location location = getLocation(autocompleteBox.getSelectedItem().toString());
+        autocompleteBox.getSelectionModel().selectFirst();
+        final Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Location chooser");
+        dialog.setHeaderText("Please, choose your location");
+        GridPane grid = new GridPane();
+        grid.add(nameField, 1, 1);
+        grid.add(autocompleteBox, 1, 2);
+        dialog.getDialogPane().setContent(grid);
+        ButtonType buttonTypeOk = new ButtonType("Select", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+        dialog.setResultConverter(new Callback<ButtonType, String>() {
+            @Override
+            public String call(ButtonType param) {
+                if(param == buttonTypeOk) {
+                    return autocompleteBox.getValue().toString();
+                } else return null;
+            }
+        });
+        Optional<String> result = dialog.showAndWait();
+        if(result.isPresent()){
+            Location location = getLocation(result.get());
             notifyEveryone(location);
         }
     }
@@ -102,12 +115,17 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
             if(entry.getAsJsonObject().get("type").getAsString().equals("city"))
                 autocomplete.add(entry.getAsJsonObject().get("name").getAsString());
         }
-        for(String s : autocomplete) System.out.println(s);
+        //for(String s : autocomplete) System.out.println(s);
     }
 
     private String getURL(String prefix) {
         prefix = prefix.toLowerCase();
-        return apiCall + prefix;
+        try{
+            return apiCall + URLEncoder.encode(prefix, "UTF-8");
+        } catch(Exception e){
+            return null;
+        }
+
     }
 
     private void notifyEveryone(Location location){
