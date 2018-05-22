@@ -33,7 +33,6 @@ public class WelcomeScreen extends AnchorPane implements Screen {
         });
         Button btnAutoDetect = new Button("Detect automatically");
         btnAutoDetect.setOnAction(event -> {
-            System.out.println("USAO OVDE");
             AutomaticLocationDetector locationDetector = new AutomaticLocationDetectorImpl();
             app.acceptLocation(locationDetector.detectLocation());
         });

@@ -68,7 +68,9 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
             @Override
             public String call(ButtonType param) {
                 if(param == buttonTypeOk) {
-                    return autocompleteBox.getValue().toString();
+                    Object value = autocompleteBox.getValue();
+                    if (value == null) return null;
+                    return value.toString();
                 } else return null;
             }
         });
@@ -110,14 +112,12 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
 
     private void getAutocompleteSuggestions(String prefix) throws JsonIOException, java.io.IOException{
         cities = readJsonFromURL(getURL(prefix)).getAsJsonObject();
-        //System.out.println(cities.toString());
         JsonArray jsonList = cities.get("RESULTS").getAsJsonArray();
         autocomplete = new ArrayList<>();
         for(JsonElement entry : jsonList){
             if(entry.getAsJsonObject().get("type").getAsString().equals("city"))
                 autocomplete.add(entry.getAsJsonObject().get("name").getAsString());
         }
-        //for(String s : autocomplete) System.out.println(s);
     }
 
     private String getURL(String prefix) {

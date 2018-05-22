@@ -1,9 +1,5 @@
 package uk.ac.cam.intdesign.group10.weatherapp.location;
 
-import java.io.*;
-import java.util.*;
-import java.net.*;
-
 public class Location {
     private String name;
     private String country, zmw, tz, tzs, path;
@@ -29,8 +25,5 @@ public class Location {
     }
     public String getLocation(){
         return zmw;
-    }
-    public void debug(){
-        System.out.println(name + " " + country + " " + zmw + " " + tz + " " + tzs + " " + path + " " + latitude + " " + longitude);
     }
 }

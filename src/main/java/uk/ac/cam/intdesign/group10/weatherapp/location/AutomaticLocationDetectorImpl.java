@@ -1,11 +1,15 @@
 package uk.ac.cam.intdesign.group10.weatherapp.location;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -40,14 +44,12 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
     @Override
     public Location detectLocation() {
         getLocation();
-        System.out.println(latitude + " " + longitude);
         try{
             getAutocompleteSuggestions();
         } catch(IOException ex){
 
         }
         Location loc = closestLocation();
-        loc.debug();
         return loc;
     }
 
@@ -61,7 +63,6 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
                     latitude,
                     longitude
             );
-            System.out.println(city.getAsJsonObject().get("name").getAsString() + " " + dist);
             if(dist < closestDist){
                 closestDist = dist;
                 best = parseLocation(city.getAsJsonObject());
@@ -93,7 +94,6 @@ public class AutomaticLocationDetectorImpl implements AutomaticLocationDetector 
         latitude = locJSON.get("lat").getAsDouble();
         longitude = locJSON.get("lon").getAsDouble();
         apiName = locJSON.get("city").getAsString();
-        //System.out.println("lat: " + latitude + " long: " + longitude);
     }
 
 
