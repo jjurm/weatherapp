@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -44,6 +45,8 @@ public class TabBarImpl extends HBox implements TabBar
     	{
     		// resize tabs to fill the width of the tab bar, with equal priority
 			HBox.setHgrow(tab, Priority.ALWAYS);
+			tab.setMaxWidth(Double.MAX_VALUE);
+			tab.setPadding(new Insets(12, 0, 12, 0));
     		getChildren().add(tab);
     	}
     	
