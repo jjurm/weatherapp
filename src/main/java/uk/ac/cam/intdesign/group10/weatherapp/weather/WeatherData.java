@@ -1,8 +1,8 @@
 package uk.ac.cam.intdesign.group10.weatherapp.weather;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -53,12 +53,13 @@ public class WeatherData {
         WeatherType(String description, String filename) {
             this.description = description;
 
-            File file = new File("assets/icons/" + filename);
             try {
-                image = ImageIO.read(file);
+                InputStream inputStream = WeatherData.class.getResourceAsStream("/icons/" + filename);
+                image = ImageIO.read(inputStream);
+
             } catch (IOException e) {
-                System.out.println("Can't load " + file.toString());
-                image = new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB);
+                System.out.println("Can't load " + filename);
+                image = null;
             }
         }
 

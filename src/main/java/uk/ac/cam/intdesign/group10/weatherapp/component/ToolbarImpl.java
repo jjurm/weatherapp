@@ -1,32 +1,22 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
-import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
-import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
-import uk.ac.cam.intdesign.group10.weatherapp.component.test.TestFxComponent;
-import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeListener;
-import java.io.File;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToolBar;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
+import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 
 public class ToolbarImpl extends ToolBar implements Toolbar {
 
@@ -39,10 +29,10 @@ public class ToolbarImpl extends ToolBar implements Toolbar {
         changeLocation = new Button();
         BufferedImage img = null;
         try{
-            img = ImageIO.read(new File("assets/icons/021-edit.png"));
+            img = ImageIO.read(getClass().getResourceAsStream("/icons/021-edit.png"));
         }
         catch(Exception ex){
-            img = new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB);
+            System.out.println("Can't load 021-edit.png");
         }
         HBox p = new HBox();
         HBox.setHgrow(p, Priority.ALWAYS);
