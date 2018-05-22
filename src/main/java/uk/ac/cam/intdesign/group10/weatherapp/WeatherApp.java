@@ -16,6 +16,9 @@ import uk.ac.cam.intdesign.group10.weatherapp.weather.MockWeatherDataProvider;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloader;
 
+/**
+ * This is the executable file of the Weather App.
+ */
 public class WeatherApp extends Application implements LocationConsumer, WeatherDataDownloader.Observer {
 
     public static final Dimension screenDimension = new Dimension(360, 600);

@@ -36,7 +36,9 @@ We used the **Gradle** build tool to build the project, manage dependencies, bui
 
 The following libraries are used (listed as dependencies in the `build.gradle` file)
 
-- [Google Gson](https://github.com/google/gson)
+- [JUnit 4](https://junit.org/junit4/) (for unit tests)
+- [Google Gson](https://github.com/google/gson) (parsing JSON from API calls)
+- [Hamcrest](http://hamcrest.org/) (matchers for JUnit)
 
 ### Graphics
 
