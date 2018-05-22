@@ -18,6 +18,8 @@ import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloader;
 
 /**
  * This is the executable file of the Weather App.
+ *
+ * Look at /diagram1.png for information about the app's UI hierarchy.
  */
 public class WeatherApp extends Application implements LocationConsumer, WeatherDataDownloader.Observer {
 
