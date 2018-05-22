@@ -12,7 +12,9 @@ There are multiple ways to run the app:
   
   This will download necessary libraries, build the project and run it.
 
-To build the JAR file bundled with all dependencies on your own, run `./gradlew fullJar`, the output is in `./build/libs`
+To run tests, run `./gradlew test` and find reports in `/build/reports/tests/test`
+
+To build the JAR file bundled with all dependencies on your own, run `./gradlew fullJar`, the output is in `/build/libs`
 
 ## Requirements
 
