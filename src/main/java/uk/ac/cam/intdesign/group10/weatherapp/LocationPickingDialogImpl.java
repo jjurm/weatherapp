@@ -83,7 +83,9 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
         Optional<String> result = dialog.showAndWait();
         if(result.isPresent()){
             Location location = getLocation(result.get());
-            notifyEveryone(location);
+            if (location != null) {
+                notifyEveryone(location);
+            }
         }
     }
 
@@ -101,6 +103,9 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
     }
 
     private Location getLocation(String text) {
+        if (cities == null) {
+            return null;
+        }
         JsonArray jsonList = cities.get("RESULTS").getAsJsonArray();
         for(JsonElement entry : jsonList){
             if(entry.getAsJsonObject().get("name").getAsString().equals(text)) return parseLocation(entry.getAsJsonObject());

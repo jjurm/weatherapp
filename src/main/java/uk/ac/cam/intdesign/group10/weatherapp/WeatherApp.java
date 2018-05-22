@@ -12,9 +12,9 @@ import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.Screen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.WelcomeScreen;
-import uk.ac.cam.intdesign.group10.weatherapp.weather.MockWeatherDataProvider;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloader;
+import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherDataDownloaderImpl;
 
 /**
  * This is the executable file of the Weather App.
@@ -66,7 +66,8 @@ public class WeatherApp extends Application implements LocationConsumer, Weather
         changeScreen(new WelcomeScreen(this));
         //changeScreen(new HomeScreen(this));
 
-        weatherDataDownloader = new MockWeatherDataProvider();
+        //weatherDataDownloader = new MockWeatherDataProvider();
+        weatherDataDownloader = new WeatherDataDownloaderImpl();
         weatherDataDownloader.subscribe(this);
 
         lastLocation = new Location("UK/London");
