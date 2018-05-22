@@ -20,6 +20,8 @@ import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 
 public class ToolbarImpl extends ToolBar implements Toolbar {
 
+    private static final String EDIT_ICON = "022-edit.png";
+
     private Location location;
     private Label locationName;
     private Button changeLocation;
@@ -27,18 +29,23 @@ public class ToolbarImpl extends ToolBar implements Toolbar {
         //setCenter(new TestFxComponent("Toolbar", Color.LIGHTBLUE));
         locationName = new Label();
         changeLocation = new Button();
-        BufferedImage img = null;
-        try{
-            img = ImageIO.read(getClass().getResourceAsStream("/icons/021-edit.png"));
-        }
-        catch(Exception ex){
-            System.out.println("Can't load 021-edit.png");
-        }
+
         HBox p = new HBox();
         HBox.setHgrow(p, Priority.ALWAYS);
-        img = resizeImage(img, BufferedImage.TYPE_INT_ARGB, 50, 50);
+        //img = resizeImage(img, BufferedImage.TYPE_INT_ARGB, 50, 50);
         ImageView imgv = new ImageView();
-        imgv.setImage(SwingFXUtils.toFXImage(img, null));
+        imgv.setFitWidth(24);
+        imgv.setFitHeight(24);
+
+        try{
+            BufferedImage img = ImageIO.read(getClass().getResourceAsStream("/icons/" + EDIT_ICON));
+            imgv.setImage(SwingFXUtils.toFXImage(img, null));
+        }
+        catch(Exception ex){
+            System.out.println("Can't load " + EDIT_ICON);
+            // don't set the icon if it can't be loaded
+        }
+
         changeLocation.setGraphic(imgv);
         changeLocation.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
