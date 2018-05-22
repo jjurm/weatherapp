@@ -13,7 +13,10 @@ public class SuitabilityEstimatorImpl implements SuitabilityEstimator {
                 auxiliary.put(info, info.temperature);
             }
         }
-
+        
+        if (auxiliary.isEmpty())
+        	return auxiliary;
+        
         double mean = 0.0;
         double variance = 0.0;
         for (WeatherData.HourInfo hr : auxiliary.keySet()) {
