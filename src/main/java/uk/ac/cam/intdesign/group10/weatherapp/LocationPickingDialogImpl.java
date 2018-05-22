@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ButtonBar;
@@ -26,6 +27,10 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
 import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 
@@ -34,10 +39,14 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
     private JsonObject cities;
     private List<String> autocomplete;
     final String apiCall = "http://autocomplete.wunderground.com/aq?h=0&query=";
+    OkHttpClient client = new OkHttpClient();
+    private TextField nameField;
+    private ComboBox autocompleteBox;
+
     @Override
     public void openDialog() {
-        TextField nameField = new TextField();
-        ComboBox autocompleteBox = new ComboBox();
+        nameField = new TextField();
+        autocompleteBox = new ComboBox();
         autocompleteBox.getItems().add("Cambridge, United Kingdom");
         nameField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -48,9 +57,6 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
                 } catch(IOException ex){
 
                 }
-                autocompleteBox.getItems().clear();
-                autocompleteBox.getItems().addAll(autocomplete);
-                autocompleteBox.getSelectionModel().selectFirst();
             }
         });
         autocompleteBox.getSelectionModel().selectFirst();
@@ -110,14 +116,38 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
         return jp.parse(new InputStreamReader((InputStream) request.getContent()));
     }
 
+    private JsonElement readJsonFromData(String data) throws JsonIOException, JsonSyntaxException, IOException {
+        JsonParser jp = new JsonParser();
+        return jp.parse(data);
+    }
+
     private void getAutocompleteSuggestions(String prefix) throws JsonIOException, java.io.IOException{
-        cities = readJsonFromURL(getURL(prefix)).getAsJsonObject();
-        JsonArray jsonList = cities.get("RESULTS").getAsJsonArray();
-        autocomplete = new ArrayList<>();
-        for(JsonElement entry : jsonList){
-            if(entry.getAsJsonObject().get("type").getAsString().equals("city"))
-                autocomplete.add(entry.getAsJsonObject().get("name").getAsString());
-        }
+        Request request = new Request.Builder().url(getURL(prefix)).build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Connection error");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String r = response.body().string();
+                cities = readJsonFromData(r).getAsJsonObject();
+                JsonArray jsonList = cities.get("RESULTS").getAsJsonArray();
+
+                autocomplete = new ArrayList<>();
+                for(JsonElement entry : jsonList){
+                    if(entry.getAsJsonObject().get("type").getAsString().equals("city"))
+                        autocomplete.add(entry.getAsJsonObject().get("name").getAsString());
+                }
+
+                Platform.runLater(() -> {
+                    autocompleteBox.getItems().clear();
+                    autocompleteBox.getItems().addAll(autocomplete);
+                    autocompleteBox.getSelectionModel().selectFirst();
+                });
+            }
+        });
     }
 
     private String getURL(String prefix) {

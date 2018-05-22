@@ -22,6 +22,8 @@ _Java version 9 or higher is required._
 
 _Internet connection is required for building and running the app._
 
+Tested on Windows 10 with Oracle Java 10 installed.
+
 ## Tools & libraries
 
 ### Gradle
@@ -41,6 +43,7 @@ The following libraries are used (listed as dependencies in the `build.gradle` f
 - [JUnit 4](https://junit.org/junit4/) (for unit tests)
 - [Google Gson](https://github.com/google/gson) (parsing JSON from API calls)
 - [Hamcrest](http://hamcrest.org/) (matchers for JUnit)
+- [OkHttp](http://square.github.io/okhttp/) for asynchronous calls
 
 ### Graphics
 
