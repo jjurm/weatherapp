@@ -7,6 +7,8 @@ There are multiple ways to run the app:
 - Run `weatherapp.jar`
   
   Required libraries are bundled in the JAR file. 
+  
+- Run `weatherapp-mocked.jar` to use with mocked data instead of real Weather provider (if requests to the provider don't work)
 
 - Run `./gradlew run` in the terminal
   
