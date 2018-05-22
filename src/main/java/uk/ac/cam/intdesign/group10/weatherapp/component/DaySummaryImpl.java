@@ -1,15 +1,13 @@
 package uk.ac.cam.intdesign.group10.weatherapp.component;
 
+import java.time.LocalDate;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
-
-import javax.swing.*;
-import java.time.LocalDate;
 
 public class DaySummaryImpl extends GridPane implements DaySummary {
     private Label weatherTypeLabel = new Label();
@@ -23,6 +21,7 @@ public class DaySummaryImpl extends GridPane implements DaySummary {
         this.dayIndex = dayIndex;
         image.setFitHeight(72);
         image.setFitWidth(72);
+        getStyleClass().add("day-summary");
         GridPane.setConstraints(dateLabel, 0, 0);
         GridPane.setConstraints(image, 1, 0);
         GridPane.setConstraints(weatherTypeLabel, 0, 1);
