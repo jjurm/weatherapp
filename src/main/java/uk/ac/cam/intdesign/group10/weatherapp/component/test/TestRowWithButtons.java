@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
 import uk.ac.cam.intdesign.group10.weatherapp.component.AppComponent;
-import uk.ac.cam.intdesign.group10.weatherapp.content.DayContentPanel;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.WelcomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
@@ -45,7 +44,7 @@ public class TestRowWithButtons extends JPanel implements AppComponent, WeatherD
 
         JButton btn2 = new JButton("Switch to DayContent");
         btn2.addActionListener(e -> {
-            homeScreen.changeContentPanel(new DayContentPanel(0));
+            homeScreen.changeContentPanel(0);
         });
         add(btn2);
     }

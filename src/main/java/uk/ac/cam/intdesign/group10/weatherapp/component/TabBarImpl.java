@@ -9,8 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import uk.ac.cam.intdesign.group10.weatherapp.WeatherApp;
-import uk.ac.cam.intdesign.group10.weatherapp.content.DayContentPanel;
-import uk.ac.cam.intdesign.group10.weatherapp.content.OverviewContentPanel;
 import uk.ac.cam.intdesign.group10.weatherapp.screen.HomeScreen;
 import uk.ac.cam.intdesign.group10.weatherapp.weather.WeatherData;
 
@@ -64,9 +62,9 @@ public class TabBarImpl extends HBox implements TabBar
     		return;
     	
     	if (id == 0)
-    		screen.changeContentPanel( new OverviewContentPanel(app, screen) );
+    		screen.changeContentPanel(0);
     	else
-    		screen.changeContentPanel( new DayContentPanel(id-1) );
+    		screen.changeContentPanel(id);
     	
     	tabs.get(activeBar).deactivate();
     	tabs.get(id).activate();
