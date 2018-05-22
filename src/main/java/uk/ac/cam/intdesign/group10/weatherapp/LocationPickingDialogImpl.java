@@ -1,23 +1,12 @@
 package uk.ac.cam.intdesign.group10.weatherapp;
 
-import com.google.gson.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.*;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
-import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,6 +16,18 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
+import uk.ac.cam.intdesign.group10.weatherapp.location.Location;
+import uk.ac.cam.intdesign.group10.weatherapp.location.LocationConsumer;
 
 public class LocationPickingDialogImpl implements LocationPickingDialog{
     private List<LocationConsumer> observers = new ArrayList<>();
@@ -59,6 +60,7 @@ public class LocationPickingDialogImpl implements LocationPickingDialog{
         GridPane grid = new GridPane();
         grid.add(nameField, 1, 1);
         grid.add(autocompleteBox, 1, 2);
+        dialog.getDialogPane().getStylesheets().add("stylesheet.css");
         dialog.getDialogPane().setContent(grid);
         ButtonType buttonTypeOk = new ButtonType("Select", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
